@@ -2,7 +2,7 @@ import Text from "./text"
 
 const Layout = (props) => {
 
-    console.log(props)
+    // console.log(props)
 
     if(!props.children.props.page) { 
         return <h1>404</h1>
