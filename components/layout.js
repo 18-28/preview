@@ -21,10 +21,10 @@ const Layout = (props) => {
     return(
         <>
             <h1>Header</h1>
+            VERCEL CHANGES?
                 {props.children.props.page.data.story.content.body.map(component => {
                     return(
                         <div>
-                            VERCEL CHANGES?
                             {switchHandle(component)}
                         </div>
                     )
