@@ -16,12 +16,10 @@ const Layout = (props) => {
         }
     }
 
-    // console.log(props.children.props.page.data.story.content)
-
     return(
         <>
             <h1>Header</h1>
-            VERCEL CHANGES?
+            VERCEL CHANGES???
                 {props.children.props.page.data.story.content.body.map(component => {
                     return(
                         <div>
