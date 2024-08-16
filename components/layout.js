@@ -19,7 +19,7 @@ const Layout = (props) => {
     return(
         <>
             <h1>Header</h1>
-            TEST BRANCH
+            NEW FEATURE
                 {props.children.props.page.data.story.content.body.map(component => {
                     return(
                         <div>
