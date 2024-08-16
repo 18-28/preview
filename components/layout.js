@@ -20,9 +20,11 @@ const Layout = (props) => {
         <>
             <h1>Header</h1>
             NEW FEATURE
-                {props.children.props.page.data.story.content.body.map(component => {
+            <h1>{process.env.TEST === "true" ? "its true" : "its false"}</h1>
+            
+                {props.children.props.page.data.story.content.body.map((component, i) => {
                     return(
-                        <div>
+                        <div key={i}>
                             {switchHandle(component)}
                         </div>
                     )
