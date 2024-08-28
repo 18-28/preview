@@ -1,6 +1,10 @@
 const Text = (props) => {
+    console.log(props)
     return(
-        <h1>{props.fields.text}</h1>
+        <>
+        HARD CODE
+        <h1>{props.fields.title}</h1>
+        </>
     )
 }
 

@@ -2,7 +2,7 @@ import Text from "./text"
 
 const Layout = (props) => {
 
-    // console.log(props)
+    console.log(props)
 
     if(!props.children.props.page) { 
         return <h1>404</h1>
@@ -19,7 +19,6 @@ const Layout = (props) => {
     return(
         <>
             <h1>Header</h1>
-            NEW FEATURE
             <h1>{process.env.TEST === "true" ? "its true" : "its false"}</h1>
             
                 {props.children.props.page.data.story.content.body.map((component, i) => {
