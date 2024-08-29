@@ -13,12 +13,12 @@ export default function Home(props) {
 }
 
 export async function getStaticProps(context){
-  console.log('index')
+//   console.log(context)
   const Storyblok = new StoryblokClient({
     accessToken: 'TZNKj6AGu78yS8UIHxicTAtt'
   })
 
-  const home = await Storyblok.get('cdn/stories/new-page', {
+  const page = await Storyblok.get(`cdn/stories/${context.params.slug}`, {
     version: context.draftMode === true ? 'draft' : 'published'
   })
 
@@ -28,16 +28,25 @@ export async function getStaticProps(context){
 
   return {
     props: {
-      page: home
+      page: page
     }
   }
 }
 
-export async function getStaticPaths(params) {
-      const paths = ['/new-page'];
+export async function getStaticPaths(context) {
+
+    const Storyblok = new StoryblokClient({
+        accessToken: 'TZNKj6AGu78yS8UIHxicTAtt'
+      })
+
+    const paths = await Storyblok.getAll(`cdn/stories`, {
+        version: context.draftMode === true ? 'draft' : 'published'
+      })
+
+      const allPaths = paths.filter(story => story.slug === story.full_slug).map(story => ({params: {slug: story.slug}}))
 
       return {
-        paths: paths,
+        paths: allPaths,
         fallback: false
       }
 }
