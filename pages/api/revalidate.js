@@ -1,6 +1,7 @@
 export default async function revalidate(req, res){
 
     console.log(req.body.text)
+    console.log(req.body.full_slug)
 
     try {
         await res.revalidate(`/${req.body.full_slug}`)
