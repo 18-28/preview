@@ -37,6 +37,7 @@ export async function getStaticPaths(params) {
       const paths = ['/new-page'];
 
       return {
-        paths: paths
+        paths: paths,
+        fallback: false
       }
 }
