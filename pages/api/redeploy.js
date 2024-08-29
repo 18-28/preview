@@ -1,3 +1,6 @@
+//create unpublish api route and call this
+//instead of directly calling this as unpublish webhook
+
 export default async function redeploy(req, res){
     try {
         const result = await fetch("https://api.vercel.com/v13/deployments", {

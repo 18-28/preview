@@ -22,6 +22,8 @@ export default async function revalidate(req, res){
         cv: cacheBuster
       })
 
+      // return res.status(200).json(publishedStories)
+
     const isPublished = publishedStories.data.stories.findIndex(story => story.full_slug === req.body.full_slug)
     const revalidationSlug = req.body.full_slug === 'home' ? '/' : `/${req.body.full_slug}`
 
