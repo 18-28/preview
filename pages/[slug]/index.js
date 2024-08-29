@@ -32,3 +32,11 @@ export async function getStaticProps(context){
     }
   }
 }
+
+export async function getStaticPaths(params) {
+      const paths = ['/new-page'];
+
+      return {
+        paths: paths
+      }
+}
