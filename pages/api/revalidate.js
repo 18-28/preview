@@ -28,14 +28,19 @@ export default async function revalidate(req, res){
     const revalidationSlug = req.body.full_slug === 'home' ? '/' : `/${req.body.full_slug}`
 
     if(isPublished != -1){
+      console.log('---attempting to revalidate---')
       try {
+        console.log('---calling to revalidation---')
           await res.revalidate(revalidationSlug)
           return res.status(200).json({ message: `Revalidated: ${req.body.full_slug}` })
       } catch (error) {
+        console.log('---failed to revalidate---')
           return res.status(500).json({ error: error.message })
       }
     } else {
+      console.log('---attempting to redeploy---')
       try {
+        console.log('---calling redeploy api---')
         const response = await fetch('https://preview-murex.vercel.app/api/redeploy', {
         // const response = await fetch('http://localhost:3000/api/redeploy', {
           method: 'POST',
@@ -46,6 +51,7 @@ export default async function revalidate(req, res){
         const data = await response.json()
         return res.status(200).json(data)
       } catch (error) {
+          console.log('---redeploy attempt failed---')
           return res.status(500).json({ error: error.message })
       }
     }
