@@ -1,6 +1,5 @@
 import StoryblokClient from 'storyblok-js-client'
 
-
 export default async function revalidate(req, res){
 
     //get storyblok published stories
@@ -30,8 +29,8 @@ export default async function revalidate(req, res){
       }
     } else {
       try {
-        const response = await fetch('http://localhost:3000/api/redeploy', {
-          method: 'GET'
+        const response = await fetch('https://preview-murex.vercel.app/api/redeploy', {
+          method: 'POST'
         })
 
         const data = await response.json()
@@ -41,6 +40,3 @@ export default async function revalidate(req, res){
       }
     }
 }
-
-//MBQsvHnZTCT0SVrLFqfpqoZj
-
