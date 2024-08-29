@@ -28,6 +28,19 @@ export default async function revalidate(req, res){
       } catch (error) {
           return res.status(500).json({ error: error.message })
       }
+    } else {
+      try {
+        const response = await fetch('http://localhost:3000/api/redeploy', {
+          method: 'GET'
+        })
+
+        const data = await response.json()
+        return res.status(200).json(data)
+      } catch (error) {
+          return res.status(500).json({ error: error.message })
+      }
     }
 }
+
+//MBQsvHnZTCT0SVrLFqfpqoZj
 
