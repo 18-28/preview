@@ -24,20 +24,23 @@ export default async function revalidate(req, res){
 
       // return res.status(200).json(publishedStories)
 
-    const isPublished = publishedStories.data.stories.findIndex(story => story.full_slug === req.body.full_slug)
+    // const isPublished = publishedStories.data.stories.findIndex(story => story.full_slug === req.body.full_slug)
+
+    //find story with same full slug
+    //compare first published and published date
+    //if same rebuild
+    //if different reval
+
+    const storyToActOn = publishedStories.data.stories.find(story => story.full_slug === req.body.full_slug)
     const revalidationSlug = req.body.full_slug === 'home' ? '/' : `/${req.body.full_slug}`
 
-    if(isPublished != -1){
-      console.log('---attempting to revalidate---')
-      try {
-        console.log('---calling to revalidation---')
-          await res.revalidate(revalidationSlug)
-          return res.status(200).json({ message: `Revalidated: ${req.body.full_slug}` })
-      } catch (error) {
-        console.log('---failed to revalidate---')
-          return res.status(500).json({ error: error.message })
-      }
-    } else {
+    // return res.status(200).json(storyToActOn)
+
+    // const data = storyToActOn.published_at !== storyToActOn.first_published_at
+
+    // return res.status(200).json({recent: storyToActOn.published_at, first: storyToActOn.first_published_at, isEqual: storyToActOn.published_at === storyToActOn.first_published_at})
+
+    if(storyToActOn.published_at === storyToActOn.first_published_at){
       console.log('---attempting to redeploy---')
       try {
         console.log('---calling redeploy api---')
@@ -52,6 +55,16 @@ export default async function revalidate(req, res){
         return res.status(200).json(data)
       } catch (error) {
           console.log('---redeploy attempt failed---')
+          return res.status(500).json({ error: error.message })
+      }
+    } else {
+      console.log('---attempting to revalidate---')
+      try {
+        console.log('---calling to revalidation---')
+          await res.revalidate(revalidationSlug)
+          return res.status(200).json({ message: `Revalidated: ${req.body.full_slug}` })
+      } catch (error) {
+        console.log('---failed to revalidate---')
           return res.status(500).json({ error: error.message })
       }
     }
