@@ -18,7 +18,7 @@ export async function getStaticProps(context){
     accessToken: 'TZNKj6AGu78yS8UIHxicTAtt'
   })
 
-  const home = await Storyblok.get('cdn/stories/home', {
+  const home = await Storyblok.get('cdn/stories/new-page', {
     version: context.draftMode === true ? 'draft' : 'published'
   })
 
