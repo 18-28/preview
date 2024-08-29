@@ -9,12 +9,17 @@ export default async function revalidate(req, res){
 
     //create another endpoint for unpublishing
 
+    console.log(req.body.text)
+
     const Storyblok = new StoryblokClient({
         accessToken: 'TZNKj6AGu78yS8UIHxicTAtt'
       })
+
+      const cacheBuster = Date.now();
     
       const publishedStories = await Storyblok.get(`cdn/stories`, {
-        version: 'published'
+        version: 'published',
+        cv: cacheBuster
       })
 
     const isPublished = publishedStories.data.stories.findIndex(story => story.full_slug === req.body.full_slug)
@@ -30,9 +35,12 @@ export default async function revalidate(req, res){
     } else {
       try {
         const response = await fetch('https://preview-murex.vercel.app/api/redeploy', {
-          method: 'POST'
+        // const response = await fetch('http://localhost:3000/api/redeploy', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+        },
         })
-
         const data = await response.json()
         return res.status(200).json(data)
       } catch (error) {
